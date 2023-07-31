@@ -1,0 +1,31 @@
+{
+  "name": "activate_event",
+  "description": "Activate the event so users can pull tickets.",
+  "type": 1,
+  "default_member_permission": "0",
+  "options": [
+    {
+      "name": "event",
+      "description": "The name of the event that should be activated.",
+      "type": 3,
+      "required": true,
+      "choices": []
+    },
+    {
+      "name": "visibility",
+      "description": "The event visibility.",
+      "type": 5,
+      "required": true,
+      "choices": [
+        {
+          "name": "public",
+          "value": true
+        },
+        {
+          "name": "private",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "create_event",
+  "description": "Create a new event that tickets can be pulled for.",
+  "type": 1,
+  "default_member_permission": "0",
+  "options": [
+    {
+      "name": "event",
+      "description": "The name of the event, this will be used to pull tickets.",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "start_time",
+      "description": "The date in which the event will start in JST. Format: YYYY-mm-dd:HH:MM:SS ex. 2023-07-17:20:00:00",
+      "type": 3,
+      "required": true
+    }
+  ]
+}

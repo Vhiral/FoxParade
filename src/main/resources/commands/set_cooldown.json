@@ -1,0 +1,21 @@
+{
+  "name": "set_cooldown",
+  "description": "Set the cooldown between ticket pulls for an event.",
+  "type": 1,
+  "default_member_permission": "0",
+  "options": [
+    {
+      "name": "event",
+      "description": "The name of the event that will have a cooldown set.",
+      "type": 3,
+      "required": true,
+      "choices": []
+    },
+    {
+      "name": "cooldown",
+      "description": "The cooldown in ms.",
+      "type": 4,
+      "required": true
+    }
+  ]
+}
