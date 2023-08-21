@@ -63,27 +63,24 @@ class TicketCommand(
         val lastPull: LocalDateTime = cooldown?.lastPull
             ?: now.minus(event.cooldown, ChronoUnit.MILLIS)
 
-        if (TimeUtil.isOnCooldown(lastPull, now, event.cooldown)) {
-            return mono {
-                interactionEvent.createFollowup(
-                    "${interactionEvent.interaction.user.username} you are currently on cooldown and can draw another ticket in " +
-                            getCooldownString(lastPull, now, event.cooldown)
-                )
-            }
+        return if (TimeUtil.isOnCooldown(lastPull, now, event.cooldown)) {
+            getFollowupForUserOnCooldown(interactionEvent, lastPull, now, event)
         } else {
-            return getNumber(event)
-                .flatMap {
-                    interactionEvent.createFollowup(
-                        ticketRandomLine.getRandomLine()
-                            .format(interactionEvent.interaction.user.username, it.toString())
-                    )
-                    saveTicketAndCooldown(
-                        now,
-                        event.id,
-                        interactionEvent.interaction.user.id.toString(),
-                        it
-                    )
-                }
+            pullTicket(event, interactionEvent, now)
+        }
+    }
+
+    private fun getFollowupForUserOnCooldown(
+        interactionEvent: ChatInputInteractionEvent,
+        lastPull: LocalDateTime,
+        now: LocalDateTime,
+        event: Event
+    ): Mono<Any> {
+        return mono {
+            interactionEvent.createFollowup(
+                "${interactionEvent.interaction.user.username} you are currently on cooldown and can draw another ticket in " +
+                        getCooldownString(lastPull, now, event.cooldown)
+            )
         }
     }
 
@@ -93,6 +90,26 @@ class TicketCommand(
         val seconds: Long = TimeUnit.MILLISECONDS.toSeconds(cooldownDifferenceMs) - TimeUnit.MINUTES.toSeconds(minutes)
 
         return if (minutes == 0L) "$seconds seconds." else "$minutes minutes $seconds seconds."
+    }
+
+    private fun pullTicket(
+        event: Event,
+        interactionEvent: ChatInputInteractionEvent,
+        now: LocalDateTime
+    ): Mono<Any> {
+        return getNumber(event)
+            .flatMap {
+                interactionEvent.createFollowup(
+                    ticketRandomLine.getRandomLine()
+                        .format(interactionEvent.interaction.user.username, it.toString())
+                )
+                saveTicketAndCooldown(
+                    now,
+                    event.id,
+                    interactionEvent.interaction.user.id.toString(),
+                    it
+                )
+            }
     }
 
     private fun getNumber(event: Event): Mono<Int> {
