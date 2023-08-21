@@ -20,7 +20,11 @@ class CommandRegistrar(
 
     private final val d4jMapper: JacksonResources = JacksonResources.create()
     private final val logger = KotlinLogging.logger {}
-    private final val eventInjectionTargets: Set<String> = setOf("activate_event", "set_cooldown")
+    private final val eventInjectionTargets: Set<String> = setOf(
+        "activate_event",
+        "set_cooldown",
+        "ticket"
+    )
 
     override fun run(args: ApplicationArguments?) {
 

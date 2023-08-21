@@ -1,0 +1,14 @@
+{
+  "name": "ticket",
+  "description": "Pull a ticket for an event.",
+  "type": 1,
+  "options": [
+    {
+      "name": "event",
+      "description": "The name of the event to pull a ticket for.",
+      "type": 3,
+      "required": true,
+      "choices": []
+    }
+  ]
+}

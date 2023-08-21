@@ -1,8 +1,7 @@
 package foxparade.command.admin
 
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent
-import foxparade.command.EventRegisterCommand
-import foxparade.command.logic.CommandRegistrar
+import foxparade.command.BasicCommand
 import foxparade.mongo.EventRepository
 import foxparade.util.OptionExtractor
 import org.springframework.stereotype.Component
@@ -11,9 +10,7 @@ import reactor.core.publisher.Mono
 @Component
 class SetCooldownCommand(
     private val eventRepository: EventRepository,
-    commandRegistrar: CommandRegistrar
-) :
-    EventRegisterCommand(commandRegistrar) {
+) : BasicCommand() {
     override fun getName(): String {
         return "set_cooldown"
     }

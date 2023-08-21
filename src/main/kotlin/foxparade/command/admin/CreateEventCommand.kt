@@ -4,7 +4,7 @@ import discord4j.core.event.domain.interaction.ChatInputInteractionEvent
 import foxparade.command.EventRegisterCommand
 import foxparade.command.logic.CommandRegistrar
 import foxparade.mongo.EventRepository
-import foxparade.mongo.dto.Event
+import foxparade.mongo.model.Event
 import foxparade.util.OptionExtractor
 import foxparade.util.TimeUtil
 import org.springframework.stereotype.Component
