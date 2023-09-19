@@ -11,7 +11,9 @@ import java.time.LocalDateTime
 interface EventRepository : ReactiveMongoRepository<Event, String> {
 
     override fun existsById(id: String): Mono<Boolean>
-    fun getByIdAndStartTimeIsLessThanEqual(id: String, timeNow: LocalDateTime): Mono<Event?>
+    fun getByIdAndStartTimeIsLessThanEqual(id: String, timeNow: LocalDateTime): Mono<Event>
+    fun existsByIdAndStartTimeIsLessThanEqualAndIsActiveIs(id: String, timeNow: LocalDateTime, isActive: Boolean = true): Mono<Boolean>
+    fun existsByIdAndIsActiveIs(id: String, isActive: Boolean = true): Mono<Boolean>
 
     @Aggregation(
         pipeline = [
@@ -20,4 +22,13 @@ interface EventRepository : ReactiveMongoRepository<Event, String> {
         ]
     )
     override fun findAll(): Flux<Event>
+
+    @Aggregation(
+        pipeline = [
+            "{ '\$match': { 'isActive':  ?0}}",
+            "{ '\$sort':  { 'startTime':  -1 }}",
+            "{ '\$limit': 25 }"
+        ]
+    )
+    fun findAllByAndIsActiveIs(isActive: Boolean = true): Flux<Event>
 }

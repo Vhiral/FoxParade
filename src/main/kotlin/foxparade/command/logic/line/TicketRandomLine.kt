@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 class TicketRandomLine : RandomLine() {
 
     private val odds: Int = 10
-    private val ticketLine: String = ":tickets: {ticket} :tickets:"
+    private val ticketLine: String = ":tickets: %s :tickets:"
     private val defaultLine: String = "*Pancake gives %s a ticket.*\n"
     private val lines: Map<Int, String> = mapOf(
         Pair(0, "*Pancake gives %s a ticket. It\'s sticky...*\n"),
@@ -31,6 +31,4 @@ class TicketRandomLine : RandomLine() {
     override fun getSize(): Int {
         return lines.size
     }
-
-
 }

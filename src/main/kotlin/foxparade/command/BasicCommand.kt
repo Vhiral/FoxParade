@@ -14,7 +14,7 @@ abstract class BasicCommand : SlashCommand {
         event.deferReply()
             .then(createFollowup(event))
             .doOnError { logger.error { it } }
-            .onErrorResume { event.createFollowup("Sorry some error happened...") }
+            .onErrorResume { event.createFollowup("Sorry, some error happened...") }
             .subscribe()
     }
 }

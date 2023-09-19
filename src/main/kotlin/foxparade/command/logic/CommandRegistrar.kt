@@ -5,11 +5,13 @@ import discord4j.core.DiscordClient
 import discord4j.discordjson.json.ApplicationCommandOptionChoiceData
 import discord4j.discordjson.json.ApplicationCommandRequest
 import foxparade.mongo.EventRepository
+import foxparade.mongo.model.Event
 import mu.KotlinLogging
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.springframework.stereotype.Component
+import reactor.core.publisher.Flux
 
 
 @Component
@@ -20,17 +22,21 @@ class CommandRegistrar(
 
     private final val d4jMapper: JacksonResources = JacksonResources.create()
     private final val logger = KotlinLogging.logger {}
-    private final val eventInjectionTargets: Set<String> = setOf(
+    private final val adminEventInjectionTargets: Set<String> = setOf(
         "activate_event",
         "set_cooldown",
-        "ticket"
+    )
+    private final val userEventInjectionTargets: Set<String> = setOf(
+        "ticket",
+        "my_tickets"
     )
 
     override fun run(args: ApplicationArguments?) {
 
         val commands: List<ApplicationCommandRequest> = getCommands()
 
-        injectEventChoices(commands)
+        injectEventChoices(commands, adminEventInjectionTargets, eventRepository.findAll())
+        injectEventChoices(commands, userEventInjectionTargets, eventRepository.findAllByAndIsActiveIs())
 
         overwriteApplicationCommands(commands)
     }
@@ -49,22 +55,25 @@ class CommandRegistrar(
             .toList()
     }
 
-    private fun injectEventChoices(commands: List<ApplicationCommandRequest>) {
+    private fun injectEventChoices(
+        commands: List<ApplicationCommandRequest>,
+        targets: Set<String>,
+        events: Flux<Event>
+    ) {
         commands.forEach {
-            if (!it.options().isAbsent && eventInjectionTargets.contains(it.name())) {
+            if (!it.options().isAbsent && targets.contains(it.name())) {
                 it.options().get()
                     .filter { option -> option.name() == "event" }
                     .forEach { option ->
-                        eventRepository.findAll()
-                            .doOnNext { event ->
-                                option.choices().get()
-                                    .add(
-                                        ApplicationCommandOptionChoiceData.builder()
-                                            .name(event.id)
-                                            .value(event.id)
-                                            .build()
-                                    )
-                            }
+                        events.doOnNext { event ->
+                            option.choices().get()
+                                .add(
+                                    ApplicationCommandOptionChoiceData.builder()
+                                        .name(event.id)
+                                        .value(event.id)
+                                        .build()
+                                )
+                        }
                             .blockLast()
                     }
             }

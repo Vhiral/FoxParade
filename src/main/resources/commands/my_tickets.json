@@ -1,0 +1,14 @@
+{
+  "name": "my_tickets",
+  "description": "See all the tickets you have pulled.",
+  "type": 1,
+  "options": [
+    {
+      "name": "event",
+      "description": "The name of the event to see pulled tickets for.",
+      "type": 3,
+      "required": true,
+      "choices": []
+    }
+  ]
+}
