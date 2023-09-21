@@ -12,7 +12,12 @@ interface EventRepository : ReactiveMongoRepository<Event, String> {
 
     override fun existsById(id: String): Mono<Boolean>
     fun getByIdAndStartTimeIsLessThanEqual(id: String, timeNow: LocalDateTime): Mono<Event>
-    fun existsByIdAndStartTimeIsLessThanEqualAndIsActiveIs(id: String, timeNow: LocalDateTime, isActive: Boolean = true): Mono<Boolean>
+    fun existsByIdAndStartTimeIsLessThanEqualAndIsActiveIs(
+        id: String,
+        timeNow: LocalDateTime,
+        isActive: Boolean = true
+    ): Mono<Boolean>
+
     fun existsByIdAndIsActiveIs(id: String, isActive: Boolean = true): Mono<Boolean>
 
     @Aggregation(

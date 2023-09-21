@@ -12,6 +12,7 @@ import foxparade.mongo.model.Event
 import foxparade.mongo.model.Ticket
 import foxparade.util.OptionExtractor
 import foxparade.util.TimeUtil
+import foxparade.util.TimeUtil.Companion.getCooldownString
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 import java.time.Duration
@@ -105,14 +106,6 @@ class TicketCommand(
             "${interactionEvent.interaction.user.username} you are currently on cooldown and can draw another ticket in " +
                     getCooldownString(lastPull, now, event.cooldown)
         )
-    }
-
-    private fun getCooldownString(lastPull: LocalDateTime, now: LocalDateTime, cooldown: Long): String {
-        val cooldownDifferenceMs: Long = cooldown - Duration.between(lastPull, now).toMillis()
-        val minutes: Long = TimeUnit.MILLISECONDS.toMinutes(cooldownDifferenceMs)
-        val seconds: Long = TimeUnit.MILLISECONDS.toSeconds(cooldownDifferenceMs) - TimeUnit.MINUTES.toSeconds(minutes)
-
-        return if (minutes == 0L) "$seconds seconds." else "$minutes minutes $seconds seconds."
     }
 
     private fun pullTicket(

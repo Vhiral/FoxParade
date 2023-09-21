@@ -1,0 +1,31 @@
+{
+  "name": "buy_toy",
+  "description": "Buy a toy from Pancake!",
+  "type": 1,
+  "options": [
+    {
+      "name": "leaves",
+      "description": "Pay more to increase your odds for better toys!",
+      "type": 4,
+      "required": true,
+      "choices": [
+        {
+          "name": "10",
+          "value": 10
+        },
+        {
+          "name": "20",
+          "value": 20
+        },
+        {
+          "name": "50",
+          "value": 50
+        },
+        {
+          "name": "100",
+          "value": 100
+        }
+      ]
+    }
+  ]
+}
