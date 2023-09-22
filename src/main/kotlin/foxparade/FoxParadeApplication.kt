@@ -10,5 +10,5 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 class FoxParadeApplication
 
 fun main(args: Array<String>) {
-	runApplication<FoxParadeApplication>(*args)
+    runApplication<FoxParadeApplication>(*args)
 }

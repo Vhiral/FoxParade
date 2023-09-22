@@ -26,7 +26,8 @@ class TimeUtil {
         fun getCooldownString(lastPull: LocalDateTime, now: LocalDateTime, cooldown: Long): String {
             val cooldownDifferenceMs: Long = cooldown - Duration.between(lastPull, now).toMillis()
             val minutes: Long = TimeUnit.MILLISECONDS.toMinutes(cooldownDifferenceMs)
-            val seconds: Long = TimeUnit.MILLISECONDS.toSeconds(cooldownDifferenceMs) - TimeUnit.MINUTES.toSeconds(minutes)
+            val seconds: Long =
+                TimeUnit.MILLISECONDS.toSeconds(cooldownDifferenceMs) - TimeUnit.MINUTES.toSeconds(minutes)
 
             return if (minutes == 0L) "$seconds seconds." else "$minutes minutes $seconds seconds."
         }

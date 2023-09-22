@@ -1,6 +1,12 @@
 package foxparade.command.logic.loot.color
 
-interface Color {
+abstract class Color(
+    colors: List<String>
+) {
 
-    fun getColor(): String
+    private val color = colors.random()
+
+    fun getColor(): String {
+        return color
+    }
 }

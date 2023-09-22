@@ -15,10 +15,8 @@ import foxparade.util.TimeUtil
 import foxparade.util.TimeUtil.Companion.getCooldownString
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
-import java.time.Duration
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.concurrent.TimeUnit
 
 @Component
 class TicketCommand(
@@ -125,7 +123,7 @@ class TicketCommand(
                             ), now
                         )
                     )
-                ).flatMap<Any?> {
+                ).flatMap {
                     interactionEvent.createFollowup(
                         ticketRandomLine.getRandomLine()
                             .format(interactionEvent.interaction.user.username, number.toString())

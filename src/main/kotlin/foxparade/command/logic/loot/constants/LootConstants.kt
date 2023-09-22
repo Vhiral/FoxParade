@@ -1,5 +1,7 @@
 package foxparade.command.logic.loot.constants
 
+import foxparade.command.logic.loot.modifier.*
+
 class LootConstants {
     companion object {
 
@@ -201,5 +203,42 @@ class LootConstants {
             "Sister Body",
             "Manicured Hands",
         )
+
+        val MODIFIER_ODDS_TABLE: Map<Long, List<Pair<IntRange, () -> Modifier>>> =
+            mapOf(
+                Pair(
+                    10, listOf(
+                        Pair((0 until 25), ::BadModifier),
+                        Pair((25 until 75), ::BasicModifier),
+                        Pair((75 until 97), ::NormalModifier),
+                        Pair((97 until 100), ::RareModifier),
+                    )
+                ),
+                Pair(
+                    20, listOf(
+                        Pair((0 until 20), ::BadModifier),
+                        Pair((20 until 55), ::BasicModifier),
+                        Pair((55 until 90), ::NormalModifier),
+                        Pair((90 until 99), ::RareModifier),
+                        Pair((99 until 100), ::MythicModifier),
+                    )
+                ),
+                Pair(
+                    50, listOf(
+                        Pair((0 until 10), ::BadModifier),
+                        Pair((10 until 25), ::BasicModifier),
+                        Pair((25 until 73), ::NormalModifier),
+                        Pair((73 until 97), ::RareModifier),
+                        Pair((97 until 100), ::MythicModifier),
+                    )
+                ),
+                Pair(
+                    100, listOf(
+                        Pair((0 until 61), ::NormalModifier),
+                        Pair((61 until 93), ::RareModifier),
+                        Pair((93 until 100), ::MythicModifier),
+                    )
+                )
+            )
     }
 }

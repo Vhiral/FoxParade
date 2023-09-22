@@ -17,14 +17,15 @@ class MyLeavesCommand(
 
     override fun createFollowup(event: ChatInputInteractionEvent): Mono<Any> {
         return leafRepository.existsById(event.interaction.user.id.asLong())
-            .flatMap<Any?> {
+            .flatMap {
                 if (it) {
                     leafRepository.findById(event.interaction.user.id.asLong())
                         .flatMap { leaf -> Mono.just(leaf.leaves) }
                 } else {
                     Mono.just(0)
                 }
-            }.flatMap {
+            }
+            .flatMap {
                 event.createFollowup(
                     "${event.interaction.user.username} you currently have $it leaves."
                 )
