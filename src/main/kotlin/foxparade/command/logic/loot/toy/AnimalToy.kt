@@ -13,7 +13,7 @@ class AnimalToy(modifier: Modifier) : Toy(modifier) {
     private val toy: String = LootConstants.ANIMAL_TOYS.random()
 
     override fun getFullToyName(): String {
-        return "${if (modifier.getRarity() == RarityEnum.BASIC) "" else color.getColor() + " "}${modifier.getModifier()} ${animal.getColor()} $toy"
+        return "${color.getColor()} ${if (modifier.getRarity() == RarityEnum.BASIC) "" else modifier.getModifier() + " "}${animal.getColor()} $toy"
     }
 
     override fun getToyName(): String {

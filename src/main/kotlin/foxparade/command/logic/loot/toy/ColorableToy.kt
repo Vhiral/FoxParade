@@ -11,7 +11,7 @@ class ColorableToy(modifier: Modifier) : Toy(modifier) {
     private val toy: String = COLORABLE_TOYS.random()
 
     override fun getFullToyName(): String {
-        return "${if (modifier.getRarity() == RarityEnum.BASIC) "" else color.getColor() + " "}${modifier.getModifier()} $toy"
+        return "${color.getColor()} ${if (modifier.getRarity() == RarityEnum.BASIC) "" else modifier.getModifier() + " "}$toy"
     }
 
     override fun getToyName(): String {
