@@ -85,7 +85,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>3.1.1</version>
 				<configuration>
-					<mainClass>FoxParadeApplication</mainClass>
+					<mainClass>foxparade.FoxParadeApplication</mainClass>
 					<layout>JAR</layout>
 				</configuration>
 			</plugin>
