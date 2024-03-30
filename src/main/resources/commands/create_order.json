@@ -1,0 +1,20 @@
+{
+  "name": "create_order",
+  "description": "Create a new order.",
+  "type": 1,
+  "default_member_permission": "0",
+  "options": [
+    {
+      "name": "order",
+      "description": "The name of the order that users will see.",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "description",
+      "description": "A brief description of the order.",
+      "type": 3,
+      "required": true
+    }
+  ]
+}

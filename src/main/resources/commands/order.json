@@ -1,0 +1,14 @@
+{
+  "name": "order",
+  "description": "Generate a page to order.",
+  "type": 1,
+  "options": [
+    {
+      "name": "order",
+      "description": "The name of the order to get a webpage for.",
+      "type": 3,
+      "required": true,
+      "choices": []
+    }
+  ]
+}

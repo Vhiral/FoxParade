@@ -1,0 +1,15 @@
+{
+  "name": "admin_order",
+  "description": "View current list of orders.",
+  "type": 1,
+  "default_member_permission": "0",
+  "options": [
+    {
+      "name": "order",
+      "description": "Order to generate webpage for.",
+      "type": 3,
+      "required": true,
+      "choices": []
+    }
+  ]
+}

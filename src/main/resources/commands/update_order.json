@@ -1,0 +1,37 @@
+{
+  "name": "update_order",
+  "description": "Update an existing order.",
+  "type": 1,
+  "default_member_permission": "0",
+  "options": [
+    {
+      "name": "order",
+      "description": "The name of the order that will be updated.",
+      "type": 3,
+      "required": true,
+      "choices": []
+    },
+    {
+      "name": "visibility",
+      "description": "Leave this empty if you don't want to change current visibility settings.",
+      "type": 5,
+      "required": false,
+      "choices": [
+        {
+          "name": "public",
+          "value": true
+        },
+        {
+          "name": "private",
+          "value": false
+        }
+      ]
+    },
+    {
+      "name": "description",
+      "description": "Leave this empty if you don't want to change the description.",
+      "type": 3,
+      "required": false
+    }
+  ]
+}

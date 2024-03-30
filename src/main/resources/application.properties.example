@@ -1,2 +1,3 @@
 spring.data.mongodb.uri=mongodb+srv://<username>:<password>@<database>/<collection>?retryWrites=true&w=majority
 discord.token=<discord token>
+foxparade.domain.name=<domain name>

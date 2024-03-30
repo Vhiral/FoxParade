@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order page</title>
+
+    <!--  Add CSS -->
+    <link th:href="@{/css/app.css}" rel="stylesheet"/>
+</head>
+<body class="inner">
+<h1 th:inline="text">Hello [[${username}]]!</h1>
+<p th:inline="text">This is an order page for [[${order}]]</p>
+<p th:inline="text">[[${description}]]</p>
+
+<form th:method="POST" th:action="@{/order/{pageId}/update(pageId=${pageId})}" th:object="${updateOrderRequest}">
+    <p><label th:for="description">Please input details of your order below, you can edit this field to update an existing order:</label></p>
+    <textarea id="description" th:name="description" th:field="*{description}" th:rows="10" th:cols="100"
+              th:maxlength="1000"
+              th:inline="text">
+    </textarea>
+    <br>
+    <input type="submit" th:value="Submit">
+</form>
+
+<form th:method="POST" th:action="@{/order/{pageId}/delete(pageId=${pageId})}">
+    <p><label>
+        Press to delete your current order.
+    </label></p>
+    <input type="submit" th:value="Delete">
+</form>
+</body>
+</html>

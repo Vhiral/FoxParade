@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order page</title>
+
+    <!--  Add CSS -->
+    <link th:href="@{/css/app.css}" rel="stylesheet"/>
+</head>
+<body class="inner">
+<h1 th:inline="text">Thanks [[${username}]]!</h1>
+<p th:inline="text">
+    Pancake has accepted your order!<br>
+    If you would like to update your order please create a new link from Discord!
+</p>
+</body>
+</html>

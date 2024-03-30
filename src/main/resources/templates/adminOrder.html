@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order page</title>
+
+    <!--  Add CSS -->
+    <link th:href="@{/css/app.css}" rel="stylesheet"/>
+</head>
+<body class="inner">
+<h1 th:inline="text">Orders for [[${order}]]!</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th> Public Name</th>
+        <th> Username</th>
+        <th> Description</th>
+        <!--        <th> Check </th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${orders.empty}">
+        <td colspan="2"> There are no orders</td>
+    </tr>
+    <tr th:each="userOrder : ${orders}">
+        <td><span th:text="${userOrder.publicName}"> Public Name </span></td>
+        <td><span th:text="${userOrder.userName}"> User Name </span></td>
+        <td><span th:text="${userOrder.description}"> Description </span></td>
+        <!--        <td><span th:text="${userOrder.check}"> Check </span></td>-->
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
